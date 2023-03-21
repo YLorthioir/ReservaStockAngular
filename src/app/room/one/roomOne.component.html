@@ -1,0 +1,23 @@
+<div>
+  <div>
+    <h1>détails de la salle</h1>
+  </div>
+  <div>
+    <p>
+      <span class="field-title">nom: </span>
+      <span class="field-value">{{room.name}}</span>
+    </p>
+    <p>
+      <span class="field-title">capacité: </span>
+      <span class="field-value">{{room.capacity}}</span>
+    </p>
+    <p>
+      <span class="field-title">pour personnel: </span>
+      <span class="field-value">{{room.forStaff}}</span>
+    </p>
+      <p>équipement:</p>
+      <ul  *ngFor="let material of room.contains">
+        <li>{{material.name}}</li>
+      </ul>
+  </div>
+</div>

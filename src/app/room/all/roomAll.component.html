@@ -1,0 +1,30 @@
+
+<h1>Liste des salles</h1>
+
+<table *ngIf="!loading && rooms">
+
+  <thead>
+  <tr>
+    <td>id</td>
+    <td>nom</td>
+    <td>capacité</td>
+    <td>pour personnel</td>
+    <td>actions</td>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <tr *ngFor="let room of rooms">
+    <td>{{ room.id}}</td>
+    <td>{{ room.name}}</td>
+    <td>{{ room.capacity }}</td>
+    <td>{{ room.forStaff}}</td>
+    <td><button (click)="onDetails(room.id)">Plus d'info</button></td>
+  </tr>
+
+  </tbody>
+
+</table>
+
+<p *ngIf="loading">... LOADING</p>

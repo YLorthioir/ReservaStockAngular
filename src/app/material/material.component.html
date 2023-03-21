@@ -1,0 +1,32 @@
+
+<h1>Liste matériel</h1>
+
+<div>
+      <input type="text" placeholder="Add material" [(ngModel)]="materialName"><button (click)="addMaterial(materialName)">ajouter</button>
+</div>
+
+<h2>Materiel disponible:</h2>
+
+<table *ngIf="!loading && materials">
+
+  <thead>
+  <tr>
+    <td>id</td>
+    <td>nom</td>
+    <td>actions</td>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <tr *ngFor="let material of materials">
+    <td>{{ material.id}}</td>
+    <td>{{ material.name}}</td>
+    <td><button (click)="removeMaterial(material.id)">supprimer</button></td>
+  </tr>
+
+  </tbody>
+
+</table>
+
+<p *ngIf="loading">... LOADING</p>

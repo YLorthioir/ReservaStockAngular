@@ -1,0 +1,32 @@
+<h1>Insérer une salle</h1>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <div>
+    <label for="in-nom" class="form-label">nom:</label><br/>
+    <input type="text" id="in-nom" class="form-control" formControlName="name">
+  </div>
+
+  <div>
+    <label for="in-capacite" class="form-label">capacité:</label><br/>
+    <input type="text" id="in-capacite" class="form-control" formControlName="capacity">
+  </div>
+
+  <div>
+    <label for="in-personnel" class="form-label">reservé au personnel:</label>
+    <input type="checkbox" id="in-personnel" formControlName="forStaff">
+  </div>
+
+  <div>
+    <label for="in-equipement" class="form-label">équipement:</label><br/>
+    <select id="in-equipement" class="form-control" formControlName="material" multiple="multiple">
+      <option value="" disabled>Choose a material</option>
+      <option *ngFor="let material of materials"
+              [ngValue]="material.id">{{ material.name }}
+      </option>
+    </select>
+  </div>
+
+  <button type="submit">envoyer</button>
+
+</form>

@@ -1,0 +1,22 @@
+.form{
+  padding-top: 20px;
+  margin: auto;
+  width: 30%;
+  height: auto;
+  background-color: grey;
+}
+
+.login{
+  text-align: center;
+  position: center;
+}
+.password{
+  text-align: center;
+  position: center;
+}
+
+.forgotten{
+  color: blue;
+  text-align: right;
+  text-underline: blue;
+}
