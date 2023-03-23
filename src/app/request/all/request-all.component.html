@@ -1,0 +1,40 @@
+<div class="admin" *ngIf="roleConnected != undefined">
+  <h1>Liste de mes demandes</h1>
+
+
+
+  <table class="table" *ngIf="!loading">
+    <thead>
+    <tr>
+      <td>capacite</td>
+      <td>date</td>
+      <td>heure</td>
+      <td>durée(minutes)</td>
+      <td>status</td>
+      <td>action</td>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let request of requests">
+      <td>{{request.roomDTO.capacity}}</td>
+      <td>{{request.startTime|date}}</td>
+      <td>{{request.startTime|date:'shortTime'}}</td>
+      <td>{{request.minutes}}</td>
+      <td *ngIf="request.adminId != null">Acceptée</td>
+      <td *ngIf="request.refusalReason != null">Refusée</td>
+      <td *ngIf="request.adminId == null && request.refusalReason == null">En traitement</td>
+      <td>
+        <button (click)="onDetails(request.id)">Plus d'infos</button>
+        <button (click)="toDelete(request.id)">supprimer</button>
+      </td>
+
+    </tbody>
+  </table>
+</div>
+<div class="unAuthorized" *ngIf="roleConnected == undefined && !loading">
+  You are not authorized!
+</div>
+<div *ngIf="loading">
+  ... LOADING
+</div>

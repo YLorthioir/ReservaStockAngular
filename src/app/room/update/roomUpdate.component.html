@@ -1,1 +1,43 @@
-<p>update works!</p>
+<h1>Modifier une salle</h1>
+
+<form [formGroup]="form2">
+  <div>
+    <label for="in-room" class="form-label">salle:</label><br/>
+    <select id="in-room" class="form-control" formControlName="roomId">
+      <option *ngFor="let room of rooms"
+              [ngValue]="room.id">{{ room.name }}
+      </option>
+    </select>
+  </div>
+</form>
+
+
+<form *ngIf="room" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <div>
+    <label for="in-nom" class="form-label">nom:</label><br/>
+    <input type="text" id="in-nom" class="form-control" formControlName="name">
+  </div>
+
+  <div>
+    <label for="in-capacite" class="form-label">capacité:</label><br/>
+    <input type="text" id="in-capacite" class="form-control" formControlName="capacity">
+  </div>
+
+  <div>
+    <label for="in-personnel" class="form-label">reservé au personnel:</label>
+    <input type="checkbox" id="in-personnel" formControlName="forStaff">
+  </div>
+
+  <div>
+    <label for="in-equipement" class="form-label">équipement:</label><br/>
+    <select id="in-equipement" class="form-control" formControlName="contains" multiple="multiple">
+      <option *ngFor="let material of materials"
+              [ngValue]="material.id">{{ material.name }}
+      </option>
+    </select>
+  </div>
+
+  <button type="submit">envoyer</button>
+
+</form>

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Room} from "../../models/room";
+import {Room} from "../../models/room/room";
 import {RoomService} from "../../service/room.service";
 import {ActivatedRoute} from "@angular/router";
 
@@ -19,7 +19,6 @@ export class RoomOneComponent implements OnInit{
   }
   ngOnInit(): void {
     this.loading = true;
-
     this._roomService.getOne(this.index).subscribe({
       next: (room) => {
         this.room = room;

@@ -6,11 +6,14 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AccueilComponent } from './components/accueil/accueil.component';
-import {RouterOutlet} from "@angular/router";
+import { RouterOutlet } from "@angular/router";
 import { MaterialComponent } from './material/material.component';
-import {HttpClientModule} from "@angular/common/http";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { LoginComponent } from './auth/login/login.component';
+import { RequestComponent } from './request/request/request.component';
+import { LogoutComponent } from './auth/logout/logout.component';
+import { StudentRegisterComponent } from './auth/student-register/student-register.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,9 @@ import { LoginComponent } from './auth/login/login.component';
     AccueilComponent,
     MaterialComponent,
     LoginComponent,
+    RequestComponent,
+    LogoutComponent,
+    StudentRegisterComponent,
   ],
   imports: [
     BrowserModule,

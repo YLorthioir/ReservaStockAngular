@@ -1,0 +1,9 @@
+<div class="topnav">
+  <a *ngIf="roleConnected != undefined" routerLink="/request/all" routerLinkActive="active">All</a>
+  <a *ngIf="roleConnected === 'ADMIN'" routerLink="/request/allUnconfirmed" routerLinkActive="active">All Unconfirmed</a>
+  <a *ngIf="roleConnected != undefined" routerLink="/request/add" routerLinkActive="active">New request</a>
+</div>
+
+<div>
+  <router-outlet></router-outlet>
+</div>

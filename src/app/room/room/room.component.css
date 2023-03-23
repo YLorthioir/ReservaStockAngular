@@ -1,8 +1,9 @@
 .topnav {
+  margin-left: 175px;
   overflow: hidden;
   background-color: #125699;
   border-radius: 10px;
-  width: 80px;
+  width: 71px;
 }
 
 .topnav a {
@@ -12,6 +13,7 @@
   padding: 4px 6px;
   text-decoration: none;
   font-size: 17px;
+  width: 60px;
 }
 
 .topnav a:hover {

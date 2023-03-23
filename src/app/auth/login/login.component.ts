@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {Login} from "../../models/login";
+import {Login} from "../../models/auth/login";
 import {AuthService} from "../../service/auth.service";
-import {UserConnected} from "../../models/userConnected";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -10,18 +10,33 @@ import {UserConnected} from "../../models/userConnected";
 })
 export class LoginComponent {
 
-  userConnected?: UserConnected;
   loginForm:Login = {
     login: '',
     password: ''
   }
-  constructor(private readonly authService: AuthService){}
+  constructor(private readonly authService: AuthService, private _router: Router){}
 
   connexion(){
-    this.authService.connect(this.loginForm).subscribe({next: (response: any) => {
-      console.log((JSON.parse(response)));
-      // this.userConnected = response.body;
-      // console.log(this.userConnected);
-    }});
+    this.authService.login(this.loginForm).subscribe({next: (response: any) => {
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("login", response.login);
+      localStorage.setItem("roles", response.roles.toString());
+      this.authService.connected();
+      this._router.navigate(['home']);
+      }});
   }
+
+  register(){
+    this._router.navigate(['studentRegister'])
+  }
+
+  forgotten(){
+    this.authService.sendNewPasswordRequest(this.loginForm).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        this._router.navigate(['home']);
+      }
+    })
+  }
+
 }

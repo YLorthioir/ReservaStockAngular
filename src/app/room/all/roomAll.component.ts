@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Room} from "../../models/room";
+import {Room} from "../../models/room/room";
 import {RoomService} from "../../service/room.service";
 import {Router} from "@angular/router";
 

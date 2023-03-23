@@ -19,14 +19,12 @@
 
   <div>
     <label for="in-equipement" class="form-label">équipement:</label><br/>
-    <select id="in-equipement" class="form-control" formControlName="material" multiple="multiple">
-      <option value="" disabled>Choose a material</option>
+    <select id="in-equipement" class="form-control" formControlName="contains" multiple="multiple">
       <option *ngFor="let material of materials"
               [ngValue]="material.id">{{ material.name }}
       </option>
     </select>
   </div>
-
   <button type="submit">envoyer</button>
 
 </form>

@@ -1,6 +1,4 @@
-import {Material} from "./material";
-
-export interface RoomForms{
+export interface RoomForm {
   capacity:number;
   name: string;
   forStaff: boolean;

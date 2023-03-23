@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {RoomForms} from "../../models/roomForms";
+import {RoomForm} from "../../models/room/roomForm";
 import {FormControl, FormGroup} from "@angular/forms";
 import {RoomService} from "../../service/room.service";
-import {Material} from "../../models/material";
+import {Material} from "../../models/material/material";
 import {MaterialService} from "../../service/material.service";
 
 @Component({
@@ -20,7 +20,7 @@ constructor(private readonly _roomService: RoomService, private readonly _materi
     'capacity': new FormControl(''),
     'name': new FormControl(''),
     'forStaff': new FormControl(false),
-    'material': new FormControl(''),
+    'contains': new FormControl(''),
 
   })
 }
@@ -36,7 +36,7 @@ constructor(private readonly _roomService: RoomService, private readonly _materi
 
   onSubmit(){
     if( this.form.valid ){
-      const room: RoomForms = {...this.form.value}
+      const room: RoomForm = {...this.form.value}
       this._roomService.add(room).subscribe((response: any) => {
         console.log(response);
       });
@@ -44,7 +44,7 @@ constructor(private readonly _roomService: RoomService, private readonly _materi
         'capacity': new FormControl(0),
         'name': new FormControl(''),
         'forStaff': new FormControl(false),
-        'material': new FormControl(''),
+        'contains': new FormControl(''),
       });
     }
   }

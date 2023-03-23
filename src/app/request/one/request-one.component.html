@@ -1,0 +1,42 @@
+<div class="admin" *ngIf="authorized||roleConnected==='ADMIN'">
+  <div>
+    <div>
+      <h1>détails de la demande</h1>
+    </div>
+    <div *ngIf="!loading">
+      <p>
+        <span>capacité: </span>
+        <span>{{request.roomDTO.capacity}}</span>
+      </p>
+      <p>
+        <span>date: </span>
+        <span>{{request.startTime|date}}</span>
+      </p>
+      <p>
+        <span>heure: </span>
+        <span>{{request.startTime|date:'shortTime'}}</span>
+      </p>
+      <p>
+        <span>durée (minutes):</span>
+        <span>{{request.minutes}}</span>
+      </p>
+      <p *ngIf="request.adminId != null">
+        <span>Acceptée </span>
+      </p>
+      <p *ngIf="request.refusalReason != null">
+        <span>Refusée: </span>
+        <span>{{request.refusalReason}}</span>
+      </p>
+      <p *ngIf="request.adminId == null && request.refusalReason == null">
+        <span>En traitement </span>
+      </p>
+
+    </div>
+  </div>
+</div>
+<div class="unAuthorized" *ngIf="!authorized && roleConnected!='ADMIN' && !loading">
+  You are not authorized!
+</div>
+<div *ngIf="loading">
+  ... LOADING
+</div>

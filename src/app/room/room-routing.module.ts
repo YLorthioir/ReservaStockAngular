@@ -5,6 +5,7 @@ import {RoomAllComponent} from "./all/roomAll.component";
 import {RoomOneComponent} from "./one/roomOne.component";
 import {RoomCreateComponent} from "./create/roomCreate.component";
 import {numberParamGuard} from "../guards/common-guard.guard";
+import {RoomUpdateComponent} from "./update/roomUpdate.component";
 
 function minMaxGuard(paramName: string, min?: number, max?: number): CanActivateFn {
   return (route,state) => {
@@ -31,6 +32,7 @@ const routes: Routes = [
       { path: 'all', component: RoomAllComponent },
       { path: ':param', component: RoomOneComponent, canActivate:[minMaxGuard('param',0,1000)], canMatch: [numberParamGuard('param')]},
       { path: 'add', component: RoomCreateComponent},
+      { path: 'update', component: RoomUpdateComponent},
 
     ]
   }

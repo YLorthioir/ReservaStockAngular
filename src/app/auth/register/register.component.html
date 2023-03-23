@@ -1,0 +1,76 @@
+<h1>Register</h1>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <div>
+    <label for="in-firstName">Prénom:</label><br/>
+    <input type="text" id="in-firstName" formControlName="firstName">
+  </div>
+
+  <div>
+    <label for="in-lastName">Nom:</label><br/>
+    <input type="text" id="in-lastName" formControlName="lastName">
+  </div>
+
+  <div>
+    <label for="in-password">Mot de passe:</label><br/>
+    <input type="password" id="in-password" formControlName="password">
+  </div>
+
+  <div>
+    <label for="in-confirmPassword">Confirmer le mot de passe:</label><br/>
+    <input type="password" id="in-confirmPassword" formControlName="confirmPassword">
+  </div>
+
+  <div>
+    <label for="in-email">Email:</label><br/>
+    <input type="text" id="in-email" formControlName="email">
+  </div>
+
+  <div>
+    <label for="in-phone">Téléphone:</label><br/>
+    <input type="text" id="in-phone" formControlName="phone">
+  </div>
+
+  <div>
+    <label for="in-number">Numéro:</label><br/>
+    <input type="text" id="in-number" formControlName="number">
+  </div>
+
+  <div>
+    <label for="in-street">Rue:</label><br/>
+    <input type="text" id="in-street" formControlName="street">
+  </div>
+
+  <div>
+    <label for="in-postCode">Code postal:</label><br/>
+    <input type="text" id="in-postCode" formControlName="postCode">
+  </div>
+
+  <div>
+    <label for="in-city">Ville:</label><br/>
+    <input type="text" id="in-city" formControlName="city">
+  </div>
+
+  <div>
+    <label for="in-country">Pays:</label><br/>
+    <input type="text" id="in-country" formControlName="country">
+  </div>
+
+  <div>
+    <label for="in-birthdate">Date de naissance:</label><br/>
+    <input type="date" id="in-birthdate" formControlName="birthdate">
+  </div>
+
+  <div>
+    <label for="in-role" class="form-label">role:</label><br/>
+    <select id="in-role" class="form-control" formControlName="roles">
+      <option value="ADMIN">Admin</option>
+      <option value="PROFESSOR">Professor</option>
+      <option value="STUDENT">Student</option>
+    </select>
+  </div>
+
+  <button type="submit">envoyer</button>
+
+</form>

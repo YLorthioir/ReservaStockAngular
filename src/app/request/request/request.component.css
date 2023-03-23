@@ -1,0 +1,35 @@
+.topnav {
+  margin-left: 220px;
+  overflow: hidden;
+  background-color: #125699;
+  border-radius: 10px;
+  width: 161px;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 4px 6px;
+  text-decoration: none;
+  font-size: 17px;
+  width: 150px;
+}
+
+.topnav a:hover {
+  border-radius: 10px;
+  background-color: #ddd;
+  color: #125699;
+}
+
+.topnav a.active {
+  border-radius: 10px;
+  background-color: darkblue;
+  color: white;
+}
+
+#login{
+  float: right;
+  padding-left: 40px;
+  padding-right: 40px;
+}
