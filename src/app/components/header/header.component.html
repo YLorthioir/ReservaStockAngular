@@ -1,9 +1,9 @@
 <div class="topnav">
   <a routerLink="/home" routerLinkActive="active">Home</a>
-  <a routerLink="/material" routerLinkActive="active">Materials</a>
-  <a routerLink="/room" routerLinkActive="active">Rooms</a>
-  <a routerLink="/request" routerLinkActive="active">Requests</a>
-  <a *ngIf="role==='ADMIN'" routerLink="/auth" routerLinkActive="active">Admin</a>
+  <a *ngIf="isConnected" routerLink="/material" routerLinkActive="active">Materials</a>
+  <a *ngIf="isConnected" routerLink="/room" routerLinkActive="active">Rooms</a>
+  <a *ngIf="isConnected" routerLink="/request" routerLinkActive="active">Requests</a>
+  <a *ngIf="getRoleConnected()==='ADMIN'" routerLink="/auth" routerLinkActive="active">Admin</a>
   <a *ngIf="!isConnected" id="login" routerLink="/login" routerLinkActive="active">Login</a>
   <a *ngIf="isConnected" id="logout" routerLink="/logout" routerLinkActive="active">Logout</a>
 </div>

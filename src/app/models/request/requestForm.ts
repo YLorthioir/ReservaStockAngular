@@ -1,5 +1,5 @@
 import {Material} from "../material/material";
-import {Room} from "../room/room";
+import {Validators} from "@angular/forms";
 
 export interface RequestForm{
   startTime: Date;
@@ -7,4 +7,12 @@ export interface RequestForm{
   requestReason: string;
   roomId: number;
   materials: Material[];
+}
+
+export const RequestForm ={
+  startTime: [],
+  minutes: ['',[Validators.min(1)]],
+  requestReason: ['',[Validators.minLength(5), Validators.maxLength(100)]],
+  room: [],
+  materials: [],
 }

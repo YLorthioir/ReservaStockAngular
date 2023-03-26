@@ -1,15 +1,17 @@
 <section>
   <div class="form">
-    <div class="login">
-      <label for="login">Login:</label>
-      <input type="text" id="login" class="form-control" [(ngModel)]="loginForm.login"/>
-    </div>
-    <div class ="password">
-      <label for="password">Password:</label>
-      <input type="password" id="password" class="form-control" [(ngModel)]="loginForm.password"/>
-    </div>
+    <form [formGroup]="form">
+      <div>
+        <label for="login">Login:</label>
+        <input type="text" id="login" class="form-control" formControlName="login"/>
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" class="form-control" formControlName="password"/>
+      </div>
+    </form>
     <button (click)="forgotten()">Password forgotten?</button>
     <button (click)="register()">Register?</button>
-    <button (click)="connexion()">Connexion</button>
+    <button [disabled]="!form.valid" (click)="connexion()">Connexion</button>
   </div>
 </section>

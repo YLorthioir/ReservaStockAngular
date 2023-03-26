@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthService} from "../../service/auth.service";
+import {RegisterForm} from "../../models/auth/registerForm";
+import {HttpStatusCode} from "@angular/common/http";
 
 @Component({
   selector: 'app-register',
@@ -10,48 +12,22 @@ import {AuthService} from "../../service/auth.service";
 })
 export class RegisterComponent {
   form: FormGroup;
-
-  roles: string[] = ['ADMIN','PROFESSOR','STUDENT']
+  roleConnected?: string;
   constructor(private readonly _authService: AuthService,
-              private _router: Router){
-
-    this.form = new FormGroup({
-      'firstName': new FormControl(''),
-      'lastName': new FormControl(''),
-      'password': new FormControl(''),
-      'confirmPassword':new FormControl(''),
-      'email': new FormControl(''),
-      'phone': new FormControl(''),
-      'number': new FormControl(''),
-      'street': new FormControl(''),
-      'postCode': new FormControl(''),
-      'city': new FormControl(''),
-      'country': new FormControl(''),
-      'birthdate': new FormControl(''),
-      'roles': new FormControl(''),
-    })
+              private _router: Router,
+              builder: FormBuilder){
+    this.roleConnected = this._authService.roleConnected.getValue()
+    this.form = builder.group(RegisterForm);
   }
 
   onSubmit(){
     if( this.form.valid ){
-      this._authService.register(this.form).subscribe((response: any) => {
-        console.log(response);
+      console.log(this.form);
+      this._authService.register(this.form.value).subscribe(() => {
+        if(HttpStatusCode.Created)
+          alert("Demande crée")
+        this.form.reset();
       });
-        this.form.reset({
-          'firstName': new FormControl(''),
-          'lastName': new FormControl(''),
-          'password': new FormControl(''),
-          'confirmPassword': new FormControl(''),
-          'email': new FormControl(''),
-          'phone': new FormControl(''),
-          'number': new FormControl(''),
-          'street': new FormControl(''),
-          'postCode': new FormControl(''),
-          'city': new FormControl(''),
-          'country': new FormControl(''),
-          'birthdate': new FormControl(''),
-          'roles': new FormControl(''),
-        })
     }
   }
 }

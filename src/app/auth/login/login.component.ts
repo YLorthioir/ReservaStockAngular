@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {Login} from "../../models/auth/login";
 import {AuthService} from "../../service/auth.service";
 import {Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -10,20 +10,28 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent {
 
-  loginForm:Login = {
-    login: '',
-    password: ''
+  form: FormGroup;
+  constructor(private readonly authService: AuthService, private _router: Router){
+    this.form = new FormGroup({
+      'login': new FormControl('',[Validators.required]),
+      'password': new FormControl('',[Validators.required]),
+    })
   }
-  constructor(private readonly authService: AuthService, private _router: Router){}
 
   connexion(){
-    this.authService.login(this.loginForm).subscribe({next: (response: any) => {
-      localStorage.setItem("token", response.token);
-      localStorage.setItem("login", response.login);
-      localStorage.setItem("roles", response.roles.toString());
-      this.authService.connected();
-      this._router.navigate(['home']);
-      }});
+    if( this.form.valid){
+      localStorage.clear();
+      this.authService.login(this.form.value).subscribe({next: (response: any) => {
+          localStorage.setItem("token", response.token);
+          localStorage.setItem("login", response.login);
+          localStorage.setItem("roles", response.roles.toString());
+          this.authService.connected();
+          this._router.navigate(['home']);
+        },
+        error:() =>{
+          alert("Login ou mot de passe invalides!");
+        }});
+    }
   }
 
   register(){
@@ -31,7 +39,7 @@ export class LoginComponent {
   }
 
   forgotten(){
-    this.authService.sendNewPasswordRequest(this.loginForm).subscribe({
+    this.authService.sendNewPasswordRequest(this.form.value).subscribe({
       next: (response: any) => {
         console.log(response);
         this._router.navigate(['home']);

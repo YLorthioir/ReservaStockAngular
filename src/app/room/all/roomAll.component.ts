@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Room} from "../../models/room/room";
 import {RoomService} from "../../service/room.service";
 import {Router} from "@angular/router";
+import {AuthService} from "../../service/auth.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-room',
@@ -13,10 +15,16 @@ export class RoomAllComponent implements OnInit{
   rooms?: any;
   loading: boolean = false
   room?: Room;
+  roleConnected?: string;
 
-  constructor(private readonly _roomService: RoomService, private _router: Router) {
+  constructor(private readonly _roomService: RoomService, private _router: Router, private readonly _authService: AuthService) {
   }
   ngOnInit(): void {
+    this.roleConnected = this._authService.roleConnected.getValue()
+    this.load()
+  }
+
+  load(){
     this.loading = true;
 
     this._roomService.getAll().subscribe({

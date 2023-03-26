@@ -11,7 +11,7 @@ export class RequestComponent {
   roleConnected: string;
 
   constructor(private readonly _authService: AuthService){
-    this.roleConnected =this._authService.getRoleConnected()
+    this.roleConnected =this._authService.roleConnected.getValue()
   }
 
 }

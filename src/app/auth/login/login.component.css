@@ -20,3 +20,7 @@
   text-align: right;
   text-underline: blue;
 }
+
+input.ng-invalid{
+  border: 2px solid red;
+}

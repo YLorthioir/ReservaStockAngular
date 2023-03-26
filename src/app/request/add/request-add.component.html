@@ -1,40 +1,45 @@
-<h1>Introduire une demande</h1>
+<div *ngIf="roleConnected!=undefined">
+  <h1>Introduire une demande</h1>
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-  <div>
-    <label for="in-creneau">date:</label><br/>
-    <input type="datetime-local" id="in-creneau" formControlName="startTime">
-  </div>
+    <div>
+      <label for="in-creneau">date:</label><br/>
+      <input type="datetime-local" id="in-creneau" formControlName="startTime">
+    </div>
 
-  <div class="mb-3">
-    <label for="in-duree">durée (en minutes):</label><br/>
-    <input type="number" id="in-duree" formControlName="minutes">
-  </div>
+    <div class="mb-3">
+      <label for="in-duree">durée (en minutes):</label><br/>
+      <input type="number" id="in-duree" formControlName="minutes">
+    </div>
 
-  <div class="mb-3">
-    <label for="in-raisondemande">raison:</label><br/>
-    <input type="text" id="in-raisondemande" formControlName="requestReason">
-  </div>
+    <div class="mb-3">
+      <label for="in-raisondemande">raison:</label><br/>
+      <input type="text" id="in-raisondemande" formControlName="requestReason">
+    </div>
 
-  <div class="mb-3">
-    <label for="in-capacite">capacité:</label><br/>
-    <select id="in-capacite" formControlName="room">
-      <option *ngFor="let room of rooms"
-              [ngValue]="room.id">{{ room.capacity }}
-      </option>
-    </select>
-  </div>
+    <div class="mb-3">
+      <label for="in-capacite">capacité:</label><br/>
+      <select id="in-capacite" formControlName="room">
+        <option *ngFor="let room of rooms"
+                [ngValue]="room.id">{{ room.capacity }}
+        </option>
+      </select>
+    </div>
 
-  <div class="mb-3">
-    <label for="in-equipement">équipement:</label><br/>
-    <select id="in-equipement" formControlName="materials" multiple="multiple">
-      <option *ngFor="let material of materials"
-              [ngValue]="material.id">{{ material.name }}
-      </option>
-    </select>
-  </div>
+    <div class="mb-3">
+      <label for="in-equipement">équipement:</label><br/>
+      <select id="in-equipement" formControlName="materials" multiple="multiple">
+        <option *ngFor="let material of materials"
+                [ngValue]="material.id">{{ material.name }}
+        </option>
+      </select>
+    </div>
 
-  <button type="submit">envoyer</button>
+    <button type="submit" [disabled]="!form.valid">envoyer</button>
 
-</form>
+  </form>
+</div>
+<div class="unAuthorized" *ngIf="roleConnected == undefined">
+  You are not authorized!
+</div>

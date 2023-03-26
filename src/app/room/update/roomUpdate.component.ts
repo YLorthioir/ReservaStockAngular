@@ -4,6 +4,7 @@ import {RoomService} from "../../service/room.service";
 import {MaterialService} from "../../service/material.service";
 import {RoomForm} from "../../models/room/roomForm";
 import {Router} from "@angular/router";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-update',
@@ -17,8 +18,12 @@ export class RoomUpdateComponent implements OnInit{
   materials!: any;
   roomId!: number;
   room?: any;
+  roleConnected?: string;
 
-  constructor(private readonly _roomService: RoomService, private readonly _materialService: MaterialService, private _router: Router) {
+  constructor(private readonly _roomService: RoomService,
+              private readonly _materialService: MaterialService,
+              private readonly _authService: AuthService,
+              private _router: Router) {
     this.form2 = new FormGroup({
       'roomId': new FormControl('')
     })
@@ -39,6 +44,8 @@ export class RoomUpdateComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
+    this.roleConnected = this._authService.roleConnected.getValue()
 
     this._materialService.getAll().subscribe({
       next: (materials) => {

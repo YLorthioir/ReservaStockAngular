@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {MaterialService} from "../../service/material.service";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-room',
@@ -6,6 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./room.component.css']
 })
 
-export class RoomComponent {
+export class RoomComponent implements OnInit{
+  roleConnected?: string;
 
+  constructor(private readonly _authService: AuthService) {
+  }
+
+  ngOnInit(): void {
+    this.roleConnected = this._authService.roleConnected.getValue()
+  }
 }

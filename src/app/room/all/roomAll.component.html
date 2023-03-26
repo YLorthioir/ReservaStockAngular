@@ -1,30 +1,33 @@
+<div *ngIf="roleConnected!=undefined">
 
-<h1>Liste des salles</h1>
+  <h1>Liste des salles</h1>
 
-<table *ngIf="!loading && rooms">
+  <table *ngIf="!loading && rooms">
 
-  <thead>
-  <tr>
-    <td>id</td>
-    <td>nom</td>
-    <td>capacité</td>
-    <td>pour personnel</td>
-    <td>actions</td>
-  </tr>
-  </thead>
+    <thead>
+    <tr>
+      <td>nom</td>
+      <td>capacité</td>
+      <td>pour personnel</td>
+      <td>actions</td>
+    </tr>
+    </thead>
 
-  <tbody>
+    <tbody>
 
-  <tr *ngFor="let room of rooms">
-    <td>{{ room.id}}</td>
-    <td>{{ room.name}}</td>
-    <td>{{ room.capacity }}</td>
-    <td>{{ room.forStaff}}</td>
-    <td><button (click)="onDetails(room.id)">Plus d'info</button></td>
-  </tr>
+    <tr *ngFor="let room of rooms">
+      <td>{{ room.name}}</td>
+      <td>{{ room.capacity }}</td>
+      <td>{{ room.forStaff}}</td>
+      <td><button (click)="onDetails(room.id)">Plus d'info</button></td>
+    </tr>
 
-  </tbody>
+    </tbody>
 
-</table>
+  </table>
 
-<p *ngIf="loading">... LOADING</p>
+  <div *ngIf="loading">... LOADING</div>
+</div>
+<div class="unAuthorized" *ngIf="roleConnected == undefined && !loading">
+  You are not authorized!
+</div>

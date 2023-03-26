@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../service/auth.service";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Component({
   selector: 'app-header',
@@ -8,12 +9,18 @@ import {AuthService} from "../../service/auth.service";
 })
 export class HeaderComponent{
   isConnected ?:boolean;
-  role?: string;
+  role!: Observable<string>;
 
   constructor(private readonly _authService: AuthService) {
-    _authService.connectedSource.subscribe(b => {
-      this.isConnected = b;
-      this.role = _authService.roleConnected;
+    _authService.connectedSource.subscribe(bool => {
+      this.isConnected = bool;
+      this.role = _authService.roleConnected.asObservable();
     })
+  }
+
+  getRoleConnected():string{
+    let roleCo!:string;
+    this.role.subscribe(value => roleCo = value)
+    return roleCo;
   }
 }

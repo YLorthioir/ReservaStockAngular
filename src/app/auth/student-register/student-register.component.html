@@ -62,6 +62,5 @@
     <input type="date" id="in-birthdate" formControlName="birthdate">
   </div>
 
-  <button type="submit">envoyer</button>
-
+  <button type="submit" [disabled]="!this.form.valid">envoyer</button>
 </form>

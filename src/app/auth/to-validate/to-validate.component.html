@@ -1,25 +1,31 @@
+<div *ngIf="roleConnected==='ADMIN'">
+
 <h1>Liste des demandes d'enregistrement en attentes</h1>
 
+  <table class="table" *ngIf="!loading">
+    <thead>
+    <tr>
+      <td>nom</td>
+      <td>prénom</td>
+      <td>Date de naissance</td>
+      <td>action</td>
+    </tr>
+    </thead>
 
+    <tbody>
+    <tr *ngFor="let user of unValidateUsers">
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.birthdate}}</td>
+      <td>
+        <button (click)="validate(user.id) ">Valider</button>
+      </td>
 
-<table class="table">
-  <thead>
-  <tr>
-    <td>nom</td>
-    <td>prénom</td>
-    <td>Date de naissance</td>
-    <td>action</td>
-  </tr>
-  </thead>
+    </tbody>
+  </table>
 
-  <tbody>
-  <tr *ngFor="let user of unValidateUsers">
-    <td>{{user.firstName}}</td>
-    <td>{{user.lastName}}</td>
-    <td>{{user.birthdate}}</td>
-    <td>
-      <button (click)="validate(user.id)">Valider</button>
-    </td>
+</div>
 
-  </tbody>
-</table>
+<div *ngIf="loading">
+  ...LOADING
+</div>

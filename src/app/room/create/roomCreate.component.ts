@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {RoomForm} from "../../models/room/roomForm";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {RoomService} from "../../service/room.service";
 import {Material} from "../../models/material/material";
 import {MaterialService} from "../../service/material.service";
+import {RegisterForm} from "../../models/auth/registerForm";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-create',
@@ -14,18 +16,18 @@ export class RoomCreateComponent implements OnInit{
 
 form: FormGroup;
 materials!: any;
+roleConnected?: string;
 
-constructor(private readonly _roomService: RoomService, private readonly _materialService: MaterialService) {
-  this.form = new FormGroup({
-    'capacity': new FormControl(''),
-    'name': new FormControl(''),
-    'forStaff': new FormControl(false),
-    'contains': new FormControl(''),
-
-  })
+constructor(private readonly _roomService: RoomService,
+            private readonly _materialService: MaterialService,
+            private readonly _authService: AuthService,
+            builder: FormBuilder) {
+  this.form = builder.group(RoomForm);
 }
 
   ngOnInit(): void {
+
+    this.roleConnected = this._authService.roleConnected.getValue()
 
     this._materialService.getAll().subscribe({
       next: (materials) => {
@@ -36,15 +38,8 @@ constructor(private readonly _roomService: RoomService, private readonly _materi
 
   onSubmit(){
     if( this.form.valid ){
-      const room: RoomForm = {...this.form.value}
-      this._roomService.add(room).subscribe((response: any) => {
-        console.log(response);
-      });
-      this.form.reset({
-        'capacity': new FormControl(0),
-        'name': new FormControl(''),
-        'forStaff': new FormControl(false),
-        'contains': new FormControl(''),
+      this._roomService.add(this.form.value).subscribe(() => {
+        this.form.reset();
       });
     }
   }

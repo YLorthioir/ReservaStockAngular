@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MaterialService} from "../service/material.service";
+import {AuthService} from "../service/auth.service";
+import {HttpStatusCode} from "@angular/common/http";
 
 @Component({
   selector: 'app-material',
@@ -11,11 +13,14 @@ export class MaterialComponent implements OnInit{
   materials?: any;
   loading: boolean = false
   materialName: string='';
-  httpStatus: number = 200;
 
-  constructor(private readonly _materialService: MaterialService) {
+  roleConnected?: string;
+
+  constructor(private readonly _materialService: MaterialService, private readonly _authService: AuthService) {
   }
   ngOnInit(): void {
+    this.roleConnected = this._authService.roleConnected.getValue();
+
     this.loading = true;
 
     this._materialService.getAll().subscribe({
@@ -23,11 +28,6 @@ export class MaterialComponent implements OnInit{
         this.materials = materials;
         this.loading = false;
       },
-      error: (error) => {
-        if (error.status === 403){
-          this.httpStatus = 403;
-        }
-      }
     })
   }
 
@@ -50,8 +50,11 @@ export class MaterialComponent implements OnInit{
   }
 
   removeMaterial(id: number){
-    this._materialService.remove(id).subscribe((response: any) => {
-      console.log(response);
+    this._materialService.remove(id).subscribe(() => {
+      if(HttpStatusCode.BadRequest)
+        alert("Vous ne pouvez pas supprimer un matériel utilisé!")
+      else if(HttpStatusCode.InternalServerError)
+        alert("Une erreur inconnue s'est produite")
       this.refreshMaterial();
     });
   }

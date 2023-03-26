@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Login} from "../models/auth/login";
-import {RegisterForm} from "../models/auth/registerForm";
 import {BehaviorSubject} from "rxjs";
 import {FormGroup} from "@angular/forms";
 import {User} from "../models/user/user";
+import {RegisterForm} from "../models/auth/registerForm";
 
 @Injectable({
   providedIn: 'root'
@@ -13,20 +13,16 @@ export class AuthService{
 
   source= new BehaviorSubject<boolean>(this.isConnected());
   connectedSource = this.source.asObservable();
-  roleConnected: string;
+  roleConnected = new BehaviorSubject<string>(localStorage.getItem("roles")!);
 
   constructor(private readonly _httpClient: HttpClient) {
-    this.roleConnected=this.getRoleConnected();
-  }
-
-  getRoleConnected():string{
-    return localStorage.getItem("roles")!
+    this.roleConnected.next(localStorage.getItem("roles")!);
   }
 
   connected(){
     if(!this.source.value){
       this.source.next(true);
-      this.roleConnected=this.getRoleConnected();
+      this.roleConnected.next(localStorage.getItem("roles")!);
     }
   }
 
@@ -34,7 +30,7 @@ export class AuthService{
     if(this.source.value){
       this.source.next(false)
       localStorage.clear()
-      this.roleConnected=this.getRoleConnected();
+      this.roleConnected.next(localStorage.getItem("roles")!);
     }
 
   }
@@ -46,14 +42,14 @@ export class AuthService{
       return true
   }
 
-  login(loginForm: Login) {
-    return this._httpClient.post('http://localhost:8080/auth/login', loginForm,{headers: this.getCredentials()})
+  login(login: FormGroup) {
+    return this._httpClient.post('http://localhost:8080/auth/login', login,{headers: this.getCredentials()})
   }
-  register(registerForm: FormGroup){
+  register(registerForm: RegisterForm){
     return this._httpClient.post('http://localhost:8080/auth/register',registerForm,{headers: this.getCredentials()})
   }
 
-  studentRegister(registerForm: FormGroup){
+  studentRegister(registerForm: RegisterForm){
     return this._httpClient.post('http://localhost:8080/auth/studentRegister',registerForm,{headers: this.getCredentials()})
   }
 
@@ -66,7 +62,7 @@ export class AuthService{
   }
 
   sendNewPasswordRequest(loginForm: Login){
-    return this._httpClient.post('http://localhost:8080/auth/sendNewPasswordRequest', loginForm,{headers: this.getCredentials()})
+    return this._httpClient.post('http://localhost:8080/auth/sendNewPasswordRequest', loginForm.login,{headers: this.getCredentials()})
   }
 
   getCredentials():HttpHeaders{

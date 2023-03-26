@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpStatusCode} from "@angular/common/http";
 import {RequestForm} from "../models/request/requestForm";
 import {ConfirmForm} from "../models/request/confirmForm";
 import {AuthService} from "./auth.service";
@@ -26,11 +26,11 @@ export class RequestService {
     }
 
     add(request: RequestForm){
-      return this._httpClient.post<RequestForm>('http://localhost:8080/request/add',request, {headers: this._authService.getCredentials()})
+      return this._httpClient.post<HttpStatusCode>('http://localhost:8080/request/add',request, {headers: this._authService.getCredentials()})
     }
 
     confirm(confirm: ConfirmForm, id: number){
-      return this._httpClient.patch<ConfirmForm>('http://localhost:8080/request/'+ id +'/confirm', confirm, {headers: this._authService.getCredentials()})
+      return this._httpClient.patch<HttpStatusCode>('http://localhost:8080/request/'+ id +'/confirm', confirm, {headers: this._authService.getCredentials()})
     }
 
     delete(id: number){

@@ -10,10 +10,12 @@ export class ToValidateComponent implements OnInit{
 
   unValidateUsers?: any;
   loading: boolean = false
+  roleConnected?: string;
 
   constructor(private readonly _authService: AuthService) {
   }
   ngOnInit(): void {
+    this.roleConnected = this._authService.roleConnected.getValue();
     this.loading = true;
 
     this._authService.getAllUnvalidate().subscribe({

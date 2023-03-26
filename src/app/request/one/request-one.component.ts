@@ -22,7 +22,7 @@ export class RequestOneComponent implements OnInit{
     this.index = route.snapshot.params['param'];
   }
   ngOnInit(): void {
-    this.roleConnected = this._authService.getRoleConnected();
+    this.roleConnected = this._authService.roleConnected.getValue()
     this.loading = true;
     this._requestService.getOne(this.index).subscribe({
       next: (request) => {

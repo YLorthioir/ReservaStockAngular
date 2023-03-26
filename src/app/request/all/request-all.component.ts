@@ -20,7 +20,7 @@ export class RequestAllComponent implements OnInit{
   }
   ngOnInit(): void {
 
-    this.roleConnected = this._authService.getRoleConnected()
+    this.roleConnected = this._authService.roleConnected.getValue()
 
     if (this.roleConnected != undefined){
       this.loading = true;
@@ -35,7 +35,7 @@ export class RequestAllComponent implements OnInit{
   }
 
   refresh(){
-    this.roleConnected = this._authService.getRoleConnected()
+    this.roleConnected = this._authService.roleConnected.getValue()
 
     if (this.roleConnected != undefined){
       this.loading = true;

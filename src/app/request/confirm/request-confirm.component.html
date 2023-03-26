@@ -1,54 +1,59 @@
-<h1>Confirmer une demande</h1>
+<div *ngIf="roleConnected==='ADMIN'">
+  <h1>Confirmer une demande</h1>
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-  <div>
-    <span>date: </span>
-    <span>{{request.startTime|date}}</span>
-  </div>
+    <div>
+      <span>date: </span>
+      <span>{{request.startTime|date}}</span>
+    </div>
 
-  <div>
-    <span>heure: </span>
-    <span>{{request.startTime|date:'shortTime'}}</span>
-  </div>
+    <div>
+      <span>heure: </span>
+      <span>{{request.startTime|date:'shortTime'}}</span>
+    </div>
 
-  <div>
-    <span>durée (minute): </span>
-    <span>{{request.minutes}}</span>
-  </div>
+    <div>
+      <span>durée (minute): </span>
+      <span>{{request.minutes}}</span>
+    </div>
 
-  <div>
-    <span>raison demande: </span>
-    <span>{{request.requestReason}}</span>
-  </div>
+    <div>
+      <span>raison demande: </span>
+      <span>{{request.requestReason}}</span>
+    </div>
 
-  <div>
-    <span>équipement: </span>
-    <ul *ngFor="let material of request.materials">
-      <li>{{material.name}}</li>
-    </ul>
-  </div>
+    <div>
+      <span>équipement: </span>
+      <ul *ngFor="let material of request.materials">
+        <li>{{material.name}}</li>
+      </ul>
+    </div>
 
-  <div>
-    <label for="in-salle" >salle:</label><br/>
-    <select id="in-salle" formControlName="room">
-      <option *ngFor="let room of rooms"
-              [ngValue]="room.id">{{ room.name }}
-      </option>
-    </select>
-  </div>
+    <div>
+      <label for="in-salle" >salle:</label><br/>
+      <select id="in-salle" formControlName="room">
+        <option *ngFor="let room of rooms"
+                [ngValue]="room.id">{{ room.name }}
+        </option>
+      </select>
+    </div>
 
-  <div>
-    <label for="in-valide">Accepter:</label>
-    <input type="checkbox" id="in-valide" formControlName="valid">
-  </div>
+    <div>
+      <label for="in-valide">Accepter:</label>
+      <input type="checkbox" id="in-valide" formControlName="valid">
+    </div>
 
-  <div>
-    <label for="in-raisonrefus">raison:</label><br/>
-    <input type="text" id="in-raisonrefus" class="form-control" formControlName="refusalReason">
-    <span></span>
-  </div>
+    <div>
+      <label for="in-raisonrefus">raison:</label><br/>
+      <input type="text" id="in-raisonrefus" class="form-control" formControlName="refusalReason">
+      <span></span>
+    </div>
 
-  <button type="submit">envoyer</button>
+    <button type="submit" [disabled]="!form.valid">envoyer</button>
 
-</form>
+  </form>
+</div>
+<div class="unAuthorized" *ngIf="roleConnected !='ADMIN'">
+  You are not authorized!
+</div>

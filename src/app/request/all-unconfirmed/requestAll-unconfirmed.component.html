@@ -3,7 +3,7 @@
 
 
 
-  <table class="table">
+  <table class="table" *ngIf="!loading">
     <thead>
     <tr>
       <td>capacite</td>
@@ -29,6 +29,9 @@
 
     </tbody>
   </table>
+</div>
+<div *ngIf="loading">
+  ... LOADING
 </div>
 <div class="unAuthorized" *ngIf="roleConnected!='ADMIN'">
   You are not authorized!
