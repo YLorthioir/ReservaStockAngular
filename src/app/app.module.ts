@@ -24,6 +24,7 @@ import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatMenuModule} from "@angular/material/menu";
+import { Page404Component } from './components/page404/page404.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {MatMenuModule} from "@angular/material/menu";
     RequestComponent,
     LogoutComponent,
     StudentRegisterComponent,
+    Page404Component,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import {Validators} from "@angular/forms";
+import {AbstractControl, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 
 export interface RegisterForm {
   lastname: string;

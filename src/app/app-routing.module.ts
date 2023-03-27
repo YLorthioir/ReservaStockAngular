@@ -4,8 +4,8 @@ import { AccueilComponent } from './components/accueil/accueil.component';
 import { MaterialComponent } from "./material/material.component";
 import { LoginComponent } from "./auth/login/login.component";
 import {LogoutComponent} from "./auth/logout/logout.component";
-import {RegisterComponent} from "./auth/register/register.component";
 import {StudentRegisterComponent} from "./auth/student-register/student-register.component";
+import {Page404Component} from "./components/page404/page404.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -16,8 +16,9 @@ const routes: Routes = [
   { path: 'studentRegister', component: StudentRegisterComponent },
   { path: 'room', loadChildren: () => import('./room/room.module').then(m => m.RoomModule) },
   { path: 'request', loadChildren: () => import('./request/request.module').then(m => m.RequestModule) },
-  { path: 'auth', loadChildren: () => import('./auth/admin.module').then(m => m.AdminModule) }
-
+  { path: 'auth', loadChildren: () => import('./auth/admin.module').then(m => m.AdminModule) },
+  { path: '404', component: Page404Component },
+  { path: '**', redirectTo: '404'}
 
 ];
 

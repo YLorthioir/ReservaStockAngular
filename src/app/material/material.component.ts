@@ -53,9 +53,9 @@ export class MaterialComponent implements OnInit{
     this._materialService.remove(id).subscribe((response) => {
       console.log(response)
       if(response.toString()==='BAD_REQUEST')
-        alert("Vous ne pouvez pas supprimer un matériel utilisé!")
+        alert("You cannot delete used material!")
       else if(response.toString()==='INTERNAL_SERVER_ERROR')
-        alert("Une erreur inconnue s'est produite")
+        alert("An unknown error has occurred")
       this.refreshMaterial();
     });
   }

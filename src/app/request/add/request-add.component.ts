@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, ValidatorFn} from "@angular/forms";
 import {Room} from "../../models/room/room";
 import {RoomService} from "../../service/room.service";
 import {RequestService} from "../../service/request.service";
@@ -51,9 +51,10 @@ export class RequestAddComponent implements OnInit{
       this._requestService.add(this.form.value).subscribe((response) => {
         this.form.reset();
         if(response.toString() === "CREATED"){
-          alert("Votre demande a été envoyée et est en attente de validation")
+          alert("\n" +
+            "Your request has been sent and is awaiting validation")
         } else if(response.toString() === "ACCEPTED"){
-          alert("Votre demande a été refusée!")
+          alert("Your request has been refused!")
         }
 
         this._router.navigate(['request']);
