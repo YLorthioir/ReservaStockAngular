@@ -1,37 +1,47 @@
 <div class="admin" *ngIf="roleConnected==='ADMIN'">
-  <h1>Liste des demandes en attentes</h1>
+  <h1>Pending requests</h1>
 
+  <table mat-table *ngIf="!loading && requests" [dataSource]="requests">
 
+    <ng-container matColumnDef="capacity">
+      <th mat-header-cell *matHeaderCellDef> Capacity: </th>
+      <td mat-cell *matCellDef="let request"> {{request.roomDTO.capacity}} </td>
+    </ng-container>
 
-  <table class="table" *ngIf="!loading">
-    <thead>
-    <tr>
-      <td>capacite</td>
-      <td>date</td>
-      <td>heure</td>
-      <td>durée(minutes)</td>
-      <td>role</td>
-      <td>action</td>
-    </tr>
-    </thead>
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let request"> {{request.startTime|date}} </td>
+    </ng-container>
 
-    <tbody>
-    <tr *ngFor="let request of requests">
-      <td>{{request.roomDTO.capacity}}</td>
-      <td>{{request.startTime|date}}</td>
-      <td>{{request.startTime|date:'shortTime'}}</td>
-      <td>{{request.minutes}}</td>
-      <td>{{request.userDTO.roles.toString()}}</td>
-      <td>
-        <button (click)="toConfirm(request.id)">traiter</button>
-        <button (click)="toDelete(request.id)">supprimer</button>
+    <ng-container matColumnDef="hour">
+      <th mat-header-cell *matHeaderCellDef> Hour </th>
+      <td mat-cell *matCellDef="let request"> {{request.startTime|date:'shortTime'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="minutes">
+      <th mat-header-cell *matHeaderCellDef> Minutes </th>
+      <td mat-cell *matCellDef="let request"> {{request.minutes}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let request"> {{request.userDTO.roles.toString()}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef > Actions: </th>
+      <td mat-cell *matCellDef="let request">
+        <button mat-stroked-button color="primary" (click)="toConfirm(request.id)">traiter</button>
+        <button mat-stroked-button color="warn" (click)="toDelete(request.id)">supprimer</button>
       </td>
+    </ng-container>
 
-    </tbody>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
 <div *ngIf="loading">
-  ... LOADING
+  <mat-spinner></mat-spinner>
 </div>
 <div class="unAuthorized" *ngIf="roleConnected!='ADMIN'">
   You are not authorized!

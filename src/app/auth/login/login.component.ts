@@ -9,12 +9,13 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
+  message: string = "Login or password erroned"
   form: FormGroup;
+  hide = true;
   constructor(private readonly authService: AuthService, private _router: Router){
     this.form = new FormGroup({
-      'login': new FormControl('',[Validators.required]),
-      'password': new FormControl('',[Validators.required]),
+      login: new FormControl('',[Validators.required]),
+      password: new FormControl(''),
     })
   }
 

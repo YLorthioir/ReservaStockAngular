@@ -50,6 +50,7 @@ export class AuthService{
   }
 
   studentRegister(registerForm: RegisterForm){
+    console.log(registerForm)
     return this._httpClient.post('http://localhost:8080/auth/studentRegister',registerForm,{headers: this.getCredentials()})
   }
 

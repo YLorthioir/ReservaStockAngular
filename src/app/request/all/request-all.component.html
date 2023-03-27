@@ -1,38 +1,50 @@
 <div class="admin" *ngIf="roleConnected != undefined">
-  <h1>Liste de mes demandes</h1>
+  <h1>my requests</h1>
 
-  <table class="table" *ngIf="!loading">
-    <thead>
-    <tr>
-      <td>capacite</td>
-      <td>date</td>
-      <td>heure</td>
-      <td>durée(minutes)</td>
-      <td>status</td>
-      <td>action</td>
-    </tr>
-    </thead>
+  <table mat-table *ngIf="!loading && requests" [dataSource]="requests"
+         matSort (matSortChange)="announceSortChange($event)">
 
-    <tbody>
-    <tr *ngFor="let request of requests">
-      <td>{{request.roomDTO.capacity}}</td>
-      <td>{{request.startTime|date}}</td>
-      <td>{{request.startTime|date:'shortTime'}}</td>
-      <td>{{request.minutes}}</td>
-      <td *ngIf="request.adminId != null">Acceptée</td>
-      <td *ngIf="request.refusalReason != null">Refusée</td>
-      <td *ngIf="request.adminId == null && request.refusalReason == null">En traitement</td>
-      <td>
-        <button (click)="onDetails(request.id)">Plus d'infos</button>
-        <button (click)="toDelete(request.id)">supprimer</button>
+    <ng-container matColumnDef="capacity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by capacity"> Capacity: </th>
+      <td mat-cell *matCellDef="let request"> {{request.roomDTO.capacity}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by date"> Date </th>
+      <td mat-cell *matCellDef="let request"> {{request.startTime|date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hour">
+      <th mat-header-cell *matHeaderCellDef> Hour </th>
+      <td mat-cell *matCellDef="let request"> {{request.startTime|date:'shortTime'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="minutes">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by minutes"> Minutes </th>
+      <td mat-cell *matCellDef="let request"> {{request.minutes}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status"> Status </th>
+      <td mat-cell *matCellDef="let request">
+        <p *ngIf="request.adminId != null">Accepted</p>
+        <p *ngIf="request.refusalReason != null">Refused</p>
+        <p *ngIf="request.adminId == null && request.refusalReason == null">Pending</p>
       </td>
+    </ng-container>
 
-    </tbody>
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef > DELETE </th>
+      <td mat-cell *matCellDef="let room"> <button (click)="toDelete(room.id)"><mat-icon>delete</mat-icon></button></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
 <div class="unAuthorized" *ngIf="roleConnected == undefined && !loading">
   You are not authorized!
 </div>
 <div *ngIf="loading">
-  ... LOADING
+  <mat-spinner></mat-spinner>
 </div>

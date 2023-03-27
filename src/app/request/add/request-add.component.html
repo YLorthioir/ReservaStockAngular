@@ -1,42 +1,52 @@
 <div *ngIf="roleConnected!=undefined">
-  <h1>Introduire une demande</h1>
+  <h1>Add a request</h1>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-    <div>
-      <label for="in-creneau">date:</label><br/>
-      <input type="datetime-local" id="in-creneau" formControlName="startTime">
-    </div>
+    <mat-form-field appearance="fill" class="fields">
+      <mat-label>Date:</mat-label>
+      <input type="datetime-local" matInput formControlName="startTime">
+    </mat-form-field>
 
-    <div class="mb-3">
-      <label for="in-duree">durée (en minutes):</label><br/>
-      <input type="number" id="in-duree" formControlName="minutes">
-    </div>
+    <br>
 
-    <div class="mb-3">
-      <label for="in-raisondemande">raison:</label><br/>
-      <input type="text" id="in-raisondemande" formControlName="requestReason">
-    </div>
+    <mat-form-field appearance="fill" class="fields">
+      <mat-label>Duration:</mat-label>
+      <input type="number" matInput formControlName="minutes">
+    </mat-form-field>
 
-    <div class="mb-3">
-      <label for="in-capacite">capacité:</label><br/>
-      <select id="in-capacite" formControlName="room">
-        <option *ngFor="let room of rooms"
-                [ngValue]="room.id">{{ room.capacity }}
-        </option>
-      </select>
-    </div>
+    <br>
 
-    <div class="mb-3">
-      <label for="in-equipement">équipement:</label><br/>
-      <select id="in-equipement" formControlName="materials" multiple="multiple">
-        <option *ngFor="let material of materials"
-                [ngValue]="material.id">{{ material.name }}
-        </option>
-      </select>
-    </div>
+    <mat-form-field appearance="fill" class="fields">
+      <mat-label>Reason:</mat-label>
+      <input type="text" matInput formControlName="requestReason">
+    </mat-form-field>
 
-    <button type="submit" [disabled]="!form.valid">envoyer</button>
+    <br>
+
+    <mat-form-field appearance="fill" class="fields">
+      <mat-label>Room's like capacity:</mat-label>
+      <mat-select formControlName="room">
+        <mat-option *ngFor="let room of rooms"
+                [value]="room.id">{{ room.name + ' - ' + room.capacity }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field appearance="fill" class="fields">
+      <mat-label>Equipement:</mat-label>
+      <mat-select formControlName="materials" multiple>
+        <mat-option *ngFor="let material of materials"
+                    [value]="material.id">{{ material.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <br>
+
+    <button type="submit" mat-stroked-button color="primary" [disabled]="!form.valid || form.untouched">Submit</button>
 
   </form>
 </div>

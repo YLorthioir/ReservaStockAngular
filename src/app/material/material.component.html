@@ -1,38 +1,46 @@
+<button color="primary" mat-button>Materials</button>
+
 <div *ngIf="roleConnected!=undefined">
 
-  <h1>Liste matériel</h1>
   <div *ngIf="roleConnected==='ADMIN'">
-    <h2>Ajout d'un matériel:</h2>
-    <div>
-      <input type="text" placeholder="Add material" [(ngModel)]="materialName"><button (click)="addMaterial(materialName)">ajouter</button>
-    </div>
+    <h2>Add material:</h2>
+    <mat-form-field appearance="fill">
+      <mat-label>New material name:</mat-label>
+      <input type="text" matInput [(ngModel)]="materialName">
+    </mat-form-field>
+    <br>
+    <button (click)="addMaterial(materialName)" mat-stroked-button color="primary">add</button>
   </div>
 
-  <h2>Materiel disponible:</h2>
+  <br>
 
-  <table *ngIf="!loading && materials">
+  <h2>Available materials:</h2>
 
-    <thead>
-    <tr>
-      <td *ngIf="roleConnected==='ADMIN'">id</td>
-      <td>Nom: </td>
-      <td *ngIf="roleConnected==='ADMIN'">actions</td>
-    </tr>
-    </thead>
+  <table mat-table *ngIf="!loading && materials" [dataSource]="materials">
 
-    <tbody>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let material"> {{material.id}} </td>
+    </ng-container>
 
-    <tr *ngFor="let material of materials">
-      <td *ngIf="roleConnected==='ADMIN'">{{ material.id}}</td>
-      <td>{{ material.name}}</td>
-      <td *ngIf="roleConnected==='ADMIN'"><button (click)="removeMaterial(material.id)">supprimer</button></td>
-    </tr>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let material"> {{material.name}} </td>
+    </ng-container>
 
-    </tbody>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef > Action </th>
+      <td mat-cell *matCellDef="let material"> <button (click)="removeMaterial(material.id) "  *ngIf="roleConnected==='ADMIN'"><mat-icon>delete</mat-icon></button> </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
   </table>
 
-  <div *ngIf="loading">... LOADING</div>
+  <div *ngIf="loading"><mat-spinner></mat-spinner></div>
 </div>
 <div class="unAuthorized" *ngIf="roleConnected == undefined && !loading">
   You are not authorized!

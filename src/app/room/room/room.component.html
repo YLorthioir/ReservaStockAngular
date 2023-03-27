@@ -1,10 +1,11 @@
-<div class="topnav">
-  <a *ngIf="roleConnected!=undefined" routerLink="/room/all" routerLinkActive="active">All</a>
-  <a *ngIf="roleConnected==='ADMIN'" routerLink="/room/add" routerLinkActive="active">Add</a>
-  <a *ngIf="roleConnected==='ADMIN'" routerLink="/room/update" routerLinkActive="active">Update</a>
-
-</div>
+<button color="primary" mat-button [matMenuTriggerFor]="Rooms">Rooms</button>
+<mat-menu #Rooms="matMenu">
+  <button mat-menu-item *ngIf="roleConnected!=undefined" routerLink="/room/all" routerLinkActive="active">All</button>
+  <button mat-menu-item *ngIf="roleConnected==='ADMIN'" routerLink="/room/add" routerLinkActive="active">Add</button>
+  <button mat-menu-item *ngIf="roleConnected==='ADMIN'" routerLink="/room/update" routerLinkActive="active">Update</button>
+</mat-menu>
 
 <div>
   <router-outlet></router-outlet>
 </div>
+

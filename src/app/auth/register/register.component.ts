@@ -13,6 +13,7 @@ import {HttpStatusCode} from "@angular/common/http";
 export class RegisterComponent {
   form: FormGroup;
   roleConnected?: string;
+  hide = true;
   constructor(private readonly _authService: AuthService,
               private _router: Router,
               builder: FormBuilder){

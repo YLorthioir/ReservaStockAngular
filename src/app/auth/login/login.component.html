@@ -1,17 +1,23 @@
 <section>
   <div class="form">
+
     <form [formGroup]="form">
-      <div>
-        <label for="login">Login:</label>
-        <input type="text" id="login" class="form-control" formControlName="login"/>
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" class="form-control" formControlName="password"/>
-      </div>
+      <mat-form-field appearance="fill">
+          <mat-label>Login:</mat-label>
+          <input type="text" matInput formControlName="login">
+      </mat-form-field>
+      <mat-form-field  appearance="fill">
+          <mat-label>Password:</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button mat-stroked-button color="primary" [disabled]="!form.valid" (click)="connexion()">Connexion</button>
+      <button mat-stroked-button color="primary" (click)="forgotten()">Password forgotten?</button>
+      <br>
+      <button mat-stroked-button color="primary"(click)="register()">Register?</button>
     </form>
-    <button (click)="forgotten()">Password forgotten?</button>
-    <button (click)="register()">Register?</button>
-    <button [disabled]="!form.valid" (click)="connexion()">Connexion</button>
   </div>
 </section>

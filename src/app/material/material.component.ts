@@ -9,7 +9,7 @@ import {HttpStatusCode} from "@angular/common/http";
   styleUrls: ['./material.component.css']
 })
 export class MaterialComponent implements OnInit{
-
+  displayedColumns: string[] = ['id', 'name','action'];
   materials?: any;
   loading: boolean = false
   materialName: string='';
@@ -50,10 +50,11 @@ export class MaterialComponent implements OnInit{
   }
 
   removeMaterial(id: number){
-    this._materialService.remove(id).subscribe(() => {
-      if(HttpStatusCode.BadRequest)
+    this._materialService.remove(id).subscribe((response) => {
+      console.log(response)
+      if(response.toString()==='BAD_REQUEST')
         alert("Vous ne pouvez pas supprimer un matériel utilisé!")
-      else if(HttpStatusCode.InternalServerError)
+      else if(response.toString()==='INTERNAL_SERVER_ERROR')
         alert("Une erreur inconnue s'est produite")
       this.refreshMaterial();
     });

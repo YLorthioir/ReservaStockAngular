@@ -1,31 +1,35 @@
 <div *ngIf="roleConnected==='ADMIN'">
 
-<h1>Liste des demandes d'enregistrement en attentes</h1>
+<h1 color="primary">Pending registered users</h1>
 
-  <table class="table" *ngIf="!loading">
-    <thead>
-    <tr>
-      <td>nom</td>
-      <td>prénom</td>
-      <td>Date de naissance</td>
-      <td>action</td>
-    </tr>
-    </thead>
+  <table mat-table *ngIf="!loading && unValidateUsers" [dataSource]="unValidateUsers">
 
-    <tbody>
-    <tr *ngFor="let user of unValidateUsers">
-      <td>{{user.firstName}}</td>
-      <td>{{user.lastName}}</td>
-      <td>{{user.birthdate}}</td>
-      <td>
-        <button (click)="validate(user.id) ">Valider</button>
-      </td>
+    <ng-container matColumnDef="firstname">
+      <th mat-header-cell *matHeaderCellDef> First name </th>
+      <td mat-cell *matCellDef="let user"> {{user.firstName}} </td>
+    </ng-container>
 
-    </tbody>
+    <ng-container matColumnDef="lastname">
+      <th mat-header-cell *matHeaderCellDef> Last name </th>
+      <td mat-cell *matCellDef="let user"> {{user.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="birthdate">
+      <th mat-header-cell *matHeaderCellDef> Birthdate </th>
+      <td mat-cell *matCellDef="let user"> {{user.birthdate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="validate">
+      <th mat-header-cell *matHeaderCellDef > Validation </th>
+      <td mat-cell *matCellDef="let user"> <button (click)="validate(user.id) ">Valider</button></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
 </div>
 
 <div *ngIf="loading">
-  ...LOADING
+  <mat-spinner></mat-spinner>
 </div>

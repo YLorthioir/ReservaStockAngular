@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {RoomService} from "../../service/room.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {RequestService} from "../../service/request.service";
@@ -14,10 +14,12 @@ import {AuthService} from "../../service/auth.service";
 })
 export class RequestConfirmComponent implements OnInit{
   form: FormGroup;
+  form2: FormGroup;
   request!: any;
   rooms!: Room[];
   index!: number;
   roleConnected?: string;
+  checked ?: boolean;
 
   constructor(private readonly _roomService: RoomService,
               private readonly _requestService: RequestService,
@@ -28,6 +30,14 @@ export class RequestConfirmComponent implements OnInit{
     this.index = route.snapshot.params['param'];
 
     this.form = builder.group(ConfirmForm);
+
+    this.form2 = new FormGroup({
+      'accepted': new FormControl(false)
+    })
+
+    this.form2.get('accepted')?.valueChanges.subscribe((v) => {
+      this.checked=v;
+    })
   }
 
   ngOnInit(): void {

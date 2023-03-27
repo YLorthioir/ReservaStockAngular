@@ -1,9 +1,10 @@
-<div class="topnav">
-  <a routerLink="/auth/register" routerLinkActive="active">Register</a>
-  <a routerLink="/auth/toValidate" routerLinkActive="active">To validate</a>
-<!--  <a routerLink="/auth/all" routerLinkActive="active">Users</a>-->
-</div>
+<button color="primary" mat-button [matMenuTriggerFor]="menu">Admin</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="/auth/register" routerLinkActive="active">Register</button>
+  <button mat-menu-item routerLink="/auth/toValidate" routerLinkActive="active">To validate</button>
+  <!--   <button mat-menu-item routerLink="/auth/all" routerLinkActive="active">Users</button>-->
+ </mat-menu>
 
-<div>
-  <router-outlet></router-outlet>
-</div>
+ <div>
+   <router-outlet></router-outlet>
+ </div>

@@ -1,56 +1,41 @@
 <div *ngIf="roleConnected==='ADMIN'">
-  <h1>Confirmer une demande</h1>
+  <h1>Confirm a request</h1>
+
+
+    <mat-list>
+      <mat-list-item>Date: {{request.startTime|date}}</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>Time: {{request.startTime|date:'shortTime'}}</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>Duration: {{request.minutes}} minutes</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>Reason: {{request.requestReason}}</mat-list-item>
+    </mat-list>
+
+  <form [formGroup]="form2">
+    <mat-checkbox color="primary" formControlName="accepted" >Accepted</mat-checkbox>
+  </form>
+    <br>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-    <div>
-      <span>date: </span>
-      <span>{{request.startTime|date}}</span>
-    </div>
+    <mat-form-field appearance="fill" *ngIf="checked">
+      <mat-label>Room:</mat-label>
+      <mat-select formControlName="room">
+        <mat-option *ngFor="let room of rooms"
+                    [value]="room.id">{{ room.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <div>
-      <span>heure: </span>
-      <span>{{request.startTime|date:'shortTime'}}</span>
-    </div>
+    <mat-form-field appearance="fill" *ngIf="!checked">
+      <mat-label>Refusal reason:</mat-label>
+      <textarea type="text" matInput formControlName="refusalReason"></textarea>
+    </mat-form-field>
 
-    <div>
-      <span>durée (minute): </span>
-      <span>{{request.minutes}}</span>
-    </div>
+    <br>
 
-    <div>
-      <span>raison demande: </span>
-      <span>{{request.requestReason}}</span>
-    </div>
-
-    <div>
-      <span>équipement: </span>
-      <ul *ngFor="let material of request.materials">
-        <li>{{material.name}}</li>
-      </ul>
-    </div>
-
-    <div>
-      <label for="in-salle" >salle:</label><br/>
-      <select id="in-salle" formControlName="room">
-        <option *ngFor="let room of rooms"
-                [ngValue]="room.id">{{ room.name }}
-        </option>
-      </select>
-    </div>
-
-    <div>
-      <label for="in-valide">Accepter:</label>
-      <input type="checkbox" id="in-valide" formControlName="valid">
-    </div>
-
-    <div>
-      <label for="in-raisonrefus">raison:</label><br/>
-      <input type="text" id="in-raisonrefus" class="form-control" formControlName="refusalReason">
-      <span></span>
-    </div>
-
-    <button type="submit" [disabled]="!form.valid">envoyer</button>
+    <button type="submit" mat-stroked-button color="primary" [disabled]="!form.valid || form.untouched">envoyer</button>
 
   </form>
 </div>

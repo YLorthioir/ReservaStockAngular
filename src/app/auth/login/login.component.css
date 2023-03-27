@@ -1,26 +1,13 @@
-.form{
-  padding-top: 20px;
+
+:host {
+  border: solid 1px;
+  border-radius: 5px;
+  width: 15%;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   margin: auto;
-  width: 30%;
-  height: auto;
-  background-color: grey;
+  margin-top: 10%;
 }
 
-.login{
-  text-align: center;
-  position: center;
-}
-.password{
-  text-align: center;
-  position: center;
-}
-
-.forgotten{
-  color: blue;
-  text-align: right;
-  text-underline: blue;
-}
-
-input.ng-invalid{
-  border: 2px solid red;
-}

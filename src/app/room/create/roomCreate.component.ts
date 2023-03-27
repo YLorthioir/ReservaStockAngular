@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {RoomForm} from "../../models/room/roomForm";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {RoomService} from "../../service/room.service";
-import {Material} from "../../models/material/material";
 import {MaterialService} from "../../service/material.service";
-import {RegisterForm} from "../../models/auth/registerForm";
 import {AuthService} from "../../service/auth.service";
 
 @Component({

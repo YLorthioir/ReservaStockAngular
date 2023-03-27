@@ -1,33 +1,39 @@
 <div *ngIf="roleConnected==='ADMIN'">
 
-  <h1>Insérer une salle</h1>
+  <h1>Create a room</h1>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-    <div>
-      <label for="in-nom" class="form-label">nom:</label><br/>
-      <input type="text" id="in-nom" class="form-control" formControlName="name">
-    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Name:</mat-label>
+      <input type="text" matInput formControlName="name">
+    </mat-form-field>
 
-    <div>
-      <label for="in-capacite" class="form-label">capacité:</label><br/>
-      <input type="text" id="in-capacite" class="form-control" formControlName="capacity">
-    </div>
+    <br>
 
-    <div>
-      <label for="in-personnel" class="form-label">reservé au personnel:</label>
-      <input type="checkbox" id="in-personnel" formControlName="forStaff">
-    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Capacity:</mat-label>
+      <input type="number" matInput formControlName="capacity">
+    </mat-form-field>
 
-    <div>
-      <label for="in-equipement" class="form-label">équipement:</label><br/>
-      <select id="in-equipement" class="form-control" formControlName="contains" multiple="multiple">
-        <option *ngFor="let material of materials"
-                [ngValue]="material.id">{{ material.name }}
-        </option>
-      </select>
-    </div>
-    <button type="submit" [disabled]="!form.valid">envoyer</button>
+    <br>
+
+    <mat-checkbox color="primary" formControlName="forStaff">For staff</mat-checkbox>
+
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Equipement:</mat-label>
+      <mat-select formControlName="contains" multiple>
+        <mat-option *ngFor="let material of materials"
+                [value]="material.id">{{ material.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <br>
+
+    <button type="submit" mat-stroked-button color="primary" [disabled]="!form.valid">envoyer</button>
 
   </form>
 </div>

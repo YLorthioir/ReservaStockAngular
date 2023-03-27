@@ -1,8 +1,9 @@
-<div class="topnav">
-  <a *ngIf="roleConnected != undefined" routerLink="/request/all" routerLinkActive="active">All</a>
-  <a *ngIf="roleConnected === 'ADMIN'" routerLink="/request/allUnconfirmed" routerLinkActive="active">All Unconfirmed</a>
-  <a *ngIf="roleConnected != undefined" routerLink="/request/add" routerLinkActive="active">New request</a>
-</div>
+<button color="primary" mat-button [matMenuTriggerFor]="Requests">Requests</button>
+<mat-menu #Requests="matMenu">
+  <button mat-menu-item *ngIf="roleConnected != undefined" routerLink="/request/all" routerLinkActive="active">All</button>
+  <button mat-menu-item *ngIf="roleConnected === 'ADMIN'" routerLink="/request/allUnconfirmed" routerLinkActive="active">All Unconfirmed</button>
+  <button mat-menu-item *ngIf="roleConnected != undefined" routerLink="/request/add" routerLinkActive="active">New request</button>
+</mat-menu>
 
 <div>
   <router-outlet></router-outlet>

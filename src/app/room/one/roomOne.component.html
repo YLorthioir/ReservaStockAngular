@@ -1,6 +1,6 @@
 <div *ngIf="roleConnected!=undefined">
   <div>
-    <h1>détails de la salle</h1>
+    <h1>Room details</h1>
   </div>
   <div>
     <p>
@@ -24,4 +24,6 @@
 <div class="unAuthorized" *ngIf="roleConnected == undefined && !loading">
   You are not authorized!
 </div>
-<div *ngIf="loading">... LOADING</div>
+<div *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>

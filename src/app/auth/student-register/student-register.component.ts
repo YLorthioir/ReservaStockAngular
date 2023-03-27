@@ -12,6 +12,7 @@ import {HttpStatusCode} from "@angular/common/http";
 })
 export class StudentRegisterComponent {
   form: FormGroup;
+  hide = true;
   constructor(private readonly _authService: AuthService,
               private _router: Router,
               builder: FormBuilder){

@@ -8,6 +8,7 @@ import {AuthService} from "../../service/auth.service";
 })
 export class ToValidateComponent implements OnInit{
 
+  displayedColumns: string[] = ['firstname', 'lastname','birthdate', 'validate'];
   unValidateUsers?: any;
   loading: boolean = false
   roleConnected?: string;

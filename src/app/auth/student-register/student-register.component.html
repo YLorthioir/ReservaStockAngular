@@ -1,66 +1,85 @@
-<h1>Register</h1>
+<h1 color="primary">Register</h1>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-  <div>
-    <label for="in-firstName">Prénom:</label><br/>
-    <input type="text" id="in-firstName" formControlName="firstName">
+  <div class="example-container">
+    <mat-form-field appearance="fill">
+      <mat-label>First name:</mat-label>
+      <input type="text" matInput formControlName="firstName">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Last name:</mat-label>
+      <input type="text" matInput formControlName="lastName">
+    </mat-form-field>
   </div>
 
-  <div>
-    <label for="in-lastName">Nom:</label><br/>
-    <input type="text" id="in-lastName" formControlName="lastName">
+  <div class="example-container">
+    <mat-form-field  appearance="fill" floatLabel="always">
+      <mat-label>Password:</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field  appearance="fill">
+      <mat-label>Confirm Password:</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
   </div>
 
-  <div>
-    <label for="in-password">Mot de passe:</label><br/>
-    <input type="password" id="in-password" formControlName="password">
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="email">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Phone</mat-label>
+    <input matInput type="phone" formControlName="phone">
+  </mat-form-field>
+
+  <div class="adress">
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Street number:</mat-label>
+        <input type="text" matInput formControlName="number">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Street:</mat-label>
+        <input type="text" matInput formControlName="street">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Post code:</mat-label>
+        <input type="number" matInput formControlName="postCode">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>City:</mat-label>
+        <input type="text" matInput formControlName="city">
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Country:</mat-label>
+      <input type="text" matInput formControlName="country">
+    </mat-form-field>
   </div>
 
-  <div>
-    <label for="in-confirmPassword">Confirmer le mot de passe:</label><br/>
-    <input type="password" id="in-confirmPassword" formControlName="confirmPassword">
-  </div>
+  <mat-form-field appearance="fill">
+    <mat-label>Birthdate:</mat-label>
+    <input type="date" matInput formControlName="birthdate">
+  </mat-form-field>
 
-  <div>
-    <label for="in-email">Email:</label><br/>
-    <input type="text" id="in-email" formControlName="email">
-  </div>
+  <br>
 
-  <div>
-    <label for="in-phone">Téléphone:</label><br/>
-    <input type="text" id="in-phone" formControlName="phone">
-  </div>
+  <button type="submit" mat-stroked-button color="primary" [disabled]="!form.valid">envoyer</button>
 
-  <div>
-    <label for="in-number">Numéro:</label><br/>
-    <input type="text" id="in-number" formControlName="number">
-  </div>
-
-  <div>
-    <label for="in-street">Rue:</label><br/>
-    <input type="text" id="in-street" formControlName="street">
-  </div>
-
-  <div>
-    <label for="in-postCode">Code postal:</label><br/>
-    <input type="text" id="in-postCode" formControlName="postCode">
-  </div>
-
-  <div>
-    <label for="in-city">Ville:</label><br/>
-    <input type="text" id="in-city" formControlName="city">
-  </div>
-
-  <div>
-    <label for="in-country">Pays:</label><br/>
-    <input type="text" id="in-country" formControlName="country">
-  </div>
-
-  <div>
-    <label for="in-birthdate">Date de naissance:</label><br/>
-    <input type="date" id="in-birthdate" formControlName="birthdate">
-  </div>
-
-  <button type="submit" [disabled]="!this.form.valid">envoyer</button>
 </form>

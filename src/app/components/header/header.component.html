@@ -1,9 +1,9 @@
-<div class="topnav">
-  <a routerLink="/home" routerLinkActive="active">Home</a>
-  <a *ngIf="isConnected" routerLink="/material" routerLinkActive="active">Materials</a>
-  <a *ngIf="isConnected" routerLink="/room" routerLinkActive="active">Rooms</a>
-  <a *ngIf="isConnected" routerLink="/request" routerLinkActive="active">Requests</a>
-  <a *ngIf="getRoleConnected()==='ADMIN'" routerLink="/auth" routerLinkActive="active">Admin</a>
-  <a *ngIf="!isConnected" id="login" routerLink="/login" routerLinkActive="active">Login</a>
-  <a *ngIf="isConnected" id="logout" routerLink="/logout" routerLinkActive="active">Logout</a>
-</div>
+<button color="primary" mat-raised-button [matMenuTriggerFor]="menu">Menu</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item  *ngIf="isConnected" routerLink="/material" routerLinkActive="active">Materials</button>
+  <button mat-menu-item *ngIf="isConnected" routerLink="/room" routerLinkActive="active">Rooms</button>
+  <button mat-menu-item *ngIf="isConnected" routerLink="/request" routerLinkActive="active">Requests</button>
+  <button mat-menu-item *ngIf="getRoleConnected()==='ADMIN'" routerLink="/auth" routerLinkActive="active">Admin</button>
+  <button mat-menu-item *ngIf="!isConnected" routerLink="/login" routerLinkActive="active">Login</button>
+  <button mat-menu-item *ngIf="isConnected" routerLink="/logout" routerLinkActive="active" class="logout">Logout</button>
+</mat-menu>

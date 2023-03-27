@@ -10,6 +10,7 @@ import {AuthService} from "../../service/auth.service";
 })
 export class RequestAllUnconfirmedComponent implements OnInit{
 
+  displayedColumns: string[] = ['capacity', 'date', 'hour', 'minutes', 'role', 'action'];
   requests!: any;
   loading: boolean = false
   roleConnected?: string;

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {RoomService} from "../../service/room.service";
 import {MaterialService} from "../../service/material.service";
 import {RoomForm} from "../../models/room/roomForm";
@@ -28,10 +28,10 @@ export class RoomUpdateComponent implements OnInit{
       'roomId': new FormControl('')
     })
     this.form = new FormGroup({
-      'capacity': new FormControl(''),
-      'name': new FormControl(''),
-      'forStaff': new FormControl(false),
-      'contains': new FormControl(''),
+      capacity: new FormControl(''),
+      name: new FormControl(''),
+      forStaff: new FormControl(''),
+      contains: new FormControl(''),
     })
     this.form2.get('roomId')?.valueChanges.subscribe((v) => {
       this.roomId=v;
@@ -72,10 +72,10 @@ export class RoomUpdateComponent implements OnInit{
 
   refresh():void{
         this.form = new FormGroup({
-          'capacity': new FormControl(this.room.capacity),
-          'name': new FormControl(this.room.name),
-          'forStaff': new FormControl(this.room.forStaff),
-          'contains': new FormControl(this.room.contains),
+          capacity: new FormControl(this.room.capacity,[Validators.min(0)]),
+          name: new FormControl(this.room.name,[Validators.minLength(3),Validators.maxLength(30)]),
+          forStaff: new FormControl(this.room.forStaff),
+          contains: new FormControl(this.room.contains),
         })
   }
 }
