@@ -1,11 +1,12 @@
 <div class="admin" *ngIf="authorized||roleConnected==='ADMIN'">
   <div>
     <div>
-      <h1>détails de la demande</h1>
+      <h1>Request details</h1>
     </div>
+
     <div *ngIf="!loading">
       <p>
-        <span>capacité: </span>
+        <span>capacity: </span>
         <span>{{request.roomDTO.capacity}}</span>
       </p>
       <p>
@@ -13,22 +14,22 @@
         <span>{{request.startTime|date}}</span>
       </p>
       <p>
-        <span>heure: </span>
+        <span>time: </span>
         <span>{{request.startTime|date:'shortTime'}}</span>
       </p>
       <p>
-        <span>durée (minutes):</span>
+        <span>duration (minutes):</span>
         <span>{{request.minutes}}</span>
       </p>
       <p *ngIf="request.adminId != null">
-        <span>Acceptée </span>
+        <span>Accepted </span>
       </p>
       <p *ngIf="request.refusalReason != null">
-        <span>Refusée: </span>
+        <span>Refused:  </span>
         <span>{{request.refusalReason}}</span>
       </p>
       <p *ngIf="request.adminId == null && request.refusalReason == null">
-        <span>En traitement </span>
+        <span>Pending </span>
       </p>
 
     </div>

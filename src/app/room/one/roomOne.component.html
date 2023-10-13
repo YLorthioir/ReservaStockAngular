@@ -4,18 +4,18 @@
   </div>
   <div>
     <p>
-      <span class="field-title">nom: </span>
+      <span class="field-title">Name: </span>
       <span class="field-value">{{room.name}}</span>
     </p>
     <p>
-      <span class="field-title">capacité: </span>
+      <span class="field-title">Capacity: </span>
       <span class="field-value">{{room.capacity}}</span>
     </p>
     <p>
-      <span class="field-title">pour personnel: </span>
+      <span class="field-title">For staff: </span>
       <span class="field-value">{{room.forStaff}}</span>
     </p>
-      <p>équipement:</p>
+      <p>Equipement:</p>
       <ul  *ngFor="let material of room.contains">
         <li>{{material.name}}</li>
       </ul>

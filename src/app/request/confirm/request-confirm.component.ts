@@ -35,8 +35,8 @@ export class RequestConfirmComponent implements OnInit{
       'accepted': new FormControl(false)
     })
 
-    this.form2.get('accepted')?.valueChanges.subscribe((v) => {
-      this.checked=v;
+    this.form2.get('accepted')?.valueChanges.subscribe((value) => {
+      this.checked=value;
     })
   }
 
@@ -59,12 +59,13 @@ export class RequestConfirmComponent implements OnInit{
 
   onSubmit(){
     if( this.form.valid ){
-      this._requestService.confirm(this.form.value, this.request.id).subscribe((response) => {
-        this.form.reset();
-        if(response.toString() === "ACCEPTED"){
-          alert("La demande a été refusée!")
-        }
-        this._router.navigate(['request']);
+      this._requestService.confirm(this.form.value, this.request.id)
+        .subscribe((response) => {
+          this.form.reset();
+          if(response.toString() === "ACCEPTED"){
+            alert("The request was denied!")
+          }
+          this._router.navigate(['request']);
       });
     }
   }

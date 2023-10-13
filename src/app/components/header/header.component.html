@@ -1,4 +1,4 @@
-<button color="primary" mat-raised-button [matMenuTriggerFor]="menu">Menu</button>
+<button color="primary" mat-raised-button [matMenuTriggerFor]="menu"><mat-icon>home</mat-icon></button>
 <mat-menu #menu="matMenu">
   <button mat-menu-item  *ngIf="isConnected" routerLink="/material" routerLinkActive="active">Materials</button>
   <button mat-menu-item *ngIf="isConnected" routerLink="/room" routerLinkActive="active">Rooms</button>

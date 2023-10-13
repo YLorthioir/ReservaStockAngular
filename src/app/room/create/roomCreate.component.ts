@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {RoomService} from "../../service/room.service";
 import {MaterialService} from "../../service/material.service";
 import {AuthService} from "../../service/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create',
@@ -19,6 +20,7 @@ roleConnected?: string;
 constructor(private readonly _roomService: RoomService,
             private readonly _materialService: MaterialService,
             private readonly _authService: AuthService,
+            private _router: Router,
             builder: FormBuilder) {
   this.form = builder.group(RoomForm);
 }
@@ -38,6 +40,7 @@ constructor(private readonly _roomService: RoomService,
     if( this.form.valid ){
       this._roomService.add(this.form.value).subscribe(() => {
         this.form.reset();
+        this._router.navigate(['room']);
       });
     }
   }
