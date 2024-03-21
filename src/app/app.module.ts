@@ -26,6 +26,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatMenuModule} from "@angular/material/menu";
 import { Page404Component } from './components/page404/page404.component';
 import { UploadFileComponent } from './upload-file-component/upload-file-component.component';
+import { DownloadFileComponent } from './download-file-component/download-file-component.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { UploadFileComponent } from './upload-file-component/upload-file-compone
     StudentRegisterComponent,
     Page404Component,
     UploadFileComponent,
+    DownloadFileComponent,
   ],
   imports: [
     BrowserModule,

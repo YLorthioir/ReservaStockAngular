@@ -7,6 +7,7 @@ import {LogoutComponent} from "./auth/logout/logout.component";
 import {StudentRegisterComponent} from "./auth/student-register/student-register.component";
 import {Page404Component} from "./components/page404/page404.component";
 import {UploadFileComponent} from "./upload-file-component/upload-file-component.component";
+import {DownloadFileComponent} from "./download-file-component/download-file-component.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'request', loadChildren: () => import('./request/request.module').then(m => m.RequestModule) },
   { path: 'auth', loadChildren: () => import('./auth/admin.module').then(m => m.AdminModule) },
   { path: 'upload', component: UploadFileComponent},
+  { path: 'download', component: DownloadFileComponent},
   { path: '404', component: Page404Component },
   { path: '**', redirectTo: '404'}
 

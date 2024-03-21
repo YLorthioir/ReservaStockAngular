@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Téléchargement de fichier</title>
+</head>
+<body>
+<h1>Téléchargement de fichier</h1>
+
+<form>
+
+  <input type="file" title="image" accept="image/png, image/jpeg" (change)="onFileSelected($event)"><br><br>
+
+  <button (click)="uploadFile()">Télécharger</button>
+</form>
+
+</body>
+</html>
